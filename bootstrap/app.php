@@ -25,7 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'driver.approved' => EnsureDriverApproved::class,
         ]);
         // Behind a load balancer/CDN, trust it so $request->ip() is the real client (needed for per-IP OTP limits):
-        // $middleware->trustProxies(at: ['10.0.0.0/8']);
+        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->shouldRenderJsonWhen(fn(Request $r) => true);
